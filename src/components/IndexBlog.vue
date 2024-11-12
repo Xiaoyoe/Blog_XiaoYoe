@@ -21,6 +21,9 @@ export default {
             headUrl:'https://wx3.sinaimg.cn/mw690/005LlktZly1hr9jdazs2ej30zk0zkx24.jpg',
         }
     },
+    methods:{
+
+    }
 }
 </script>
 
