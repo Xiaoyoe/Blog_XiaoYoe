@@ -1,0 +1,209 @@
+
+.home-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 57px);
+  //overflow: scroll
+  overflow-y: auto; /* 添加垂直滚动条 */
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: lightskyblue;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: skyblue;
+    border-radius: 35px;
+  }
+
+
+  .home-main-box {
+    display: flex;
+    width: 100%;
+    margin: 0 32px;
+
+    .card-box {
+      flex: 6;
+
+      .home-card {
+        box-sizing: border-box;
+        display: flex;
+        //width: 100%;
+        height: 252px;
+        margin-top: 20px;
+        background: #fffffff1;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgb(231 198 198 / 76%);
+
+        /* 左边图片盒子样式 */
+
+        .home-card-left-box {
+          flex: 0 0 auto;
+          height: 252px;
+          overflow: hidden;
+
+          & > img {
+            width: 100%; /* 图片宽度占满容器 */
+            height: 100%; /* 图片高度占满容器 */
+
+            /* 图片自适应填充容器，保持比例，覆盖整个区域 */
+
+            /* object-fit: cover;           */
+            object-position: center center; /* 图片居中显示 */
+            border-radius: 8px 0 0 8px;
+            transition: 0.5s ease-in-out;
+            transform: scale(1);
+
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+
+        /* 右边文章盒子内容样式 */
+
+        .home-card-right-box {
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          height: 252px;
+          padding: 16px;
+          overflow: hidden;
+
+          .card-text-title {
+            display: flex;
+            align-items: center;
+            height: 50px;
+
+            /* 标题盒子 */
+
+            & > span {
+              overflow: hidden;
+              font-size: 25px;
+              font-weight: 800;
+              text-overflow: ellipsis; /* 超出部分使用省略号表示 */
+              line-clamp: 1;
+              white-space: nowrap;
+            }
+
+          }
+
+          /* 文本盒子 */
+
+          .card-right-text {
+            height: 171px;
+            margin: 2px 0;
+            overflow: hidden;
+
+            .text-span {
+              box-sizing: border-box;
+              //padding: 20px;
+              -webkit-line-clamp: 5;
+            }
+          }
+        }
+
+        /* 底部盒子 */
+
+        .card-right-bottom-box {
+          display: flex;
+          align-items: center;
+          //width: 100%;
+          height: 31px;
+
+          .time-n {
+            display: flex;
+            align-items: center;
+
+            & > .icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-top: 1px;
+              margin-right: 2px;
+            }
+          }
+
+          .user-n {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+
+    .user-box {
+      box-sizing: border-box;
+      flex: 4;
+      flex: 0 0 auto;
+      margin-top: 20px;
+      margin-left: 20px;
+      backdrop-filter: blur(2px);
+
+      .user-card {
+        width: 100%;
+        height: 523px;
+        background: #ffffffe5;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgb(231 198 198 / 76%);
+
+        .user-card-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .user-card-small-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+
+            & > img {
+              width: 120px;
+              margin-top: 10px;
+              border-radius: 50%;
+            }
+
+            .name-box {
+              margin: 15px 0;
+              font-size: 20px;
+              font-weight: 800;
+            }
+
+            .user-text {
+              font-size: 14px;
+              text-align: center;
+            }
+          }
+
+          /* 标签盒子 */
+
+          .social-tag {
+            width: 90%;
+            height: 30px;
+            margin-top: 10px;
+            line-height: 30px;
+            text-align: center;
+            background: lightblue;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+
