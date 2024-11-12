@@ -22,9 +22,6 @@ export default {
   cursor: url(@/assets/global_assets/shubiao.ico), auto;
 }
 
-/* 首页上下浮动图标样式 */
-/* 浏览器滚动条样式改变 */
-
 /* 网站背景图样式 */
 .AppMain {
   position: relative;
