@@ -21,6 +21,7 @@ Mock.mock('/api/cardContentData', 'get', {
       title: '@ctitle(30, 40)', // 生成 5 到 20 个中文字符的标题
       content: '@cparagraph(3, 20)', // 生成 3 到 5 句话的内容
       date: '@date("yyyy-MM-dd")', // 生成日期格式为 yyyy-MM-dd
+      img: '',
     },
   ],
 })
