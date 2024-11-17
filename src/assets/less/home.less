@@ -28,10 +28,111 @@
     display: flex;
     width: 100%;
     margin: 0 32px;
-
+    
     .card-box {
       flex: 6;
 
+      // 轮播图
+      .carousel-big-box {
+        overflow: hidden;
+
+        .carousel-box {
+          height: 455px;
+          border-radius: 8px;
+          margin-top: 20px;
+          position: relative;
+          box-shadow: 0 0 10px rgb(231 198 198 / 76%);
+  
+          & > img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            object-position: center center;
+            object-fit: cover;
+          }
+  
+          .arrows-box {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+  
+            .arrows-show{
+              transform: scale(1.2);
+              transition: .3s ease-in-out;
+              font-size: 30px;
+              font-weight: 800;
+              color: rgb(241, 119, 140);
+              opacity: .7;
+            }
+  
+            .arrows-show:hover {
+               opacity: 1;
+               transform: scale(1.5);
+            }
+  
+            #arrows-left {
+              width: 50px;
+              height: 100%;
+              border-radius: 8px 0 0 8px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+  
+            #arrows-right {
+              width: 50px;
+              height: 100%;
+              border-radius: 0 8px 8px 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+  
+          .carousel-dot-box {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            width: 100%;
+            height: 30px;
+            bottom: 0;
+  
+            .dots {
+              background: #ffffffba;
+              margin: 0 10px;
+              border-radius: 50px;
+              width: 50px;
+              height: 8px;
+              transition: .3s ease-in-out;
+              transform: scale(1);
+              box-shadow: 0 0 20px rgb(241, 194, 194);
+            }
+  
+            .dots-index {
+              background: #fd8ea1;
+              margin: 0 10px;
+              border-radius: 50px;
+              width: 50px;
+              height: 8px;
+              transition: .3s ease-in-out;
+              transform: scale(1);
+              box-shadow: 0 0 20px rgb(241, 194, 194);
+            }
+  
+            .dots:hover {
+              background: #fd8ea1;
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+
+
+      // 文章样式
       .home-card {
         box-sizing: border-box;
         display: flex;
@@ -51,13 +152,12 @@
           width: 440px;
 
           & > img {
-            object-fit: cover;
             width: 100%; /* 图片宽度占满容器 */
             height: 100%; /* 图片高度占满容器 */
 
             /* 图片自适应填充容器，保持比例，覆盖整个区域 */
 
-            /* object-fit: cover;           */
+            object-fit: cover;
             object-position: center center; /* 图片居中显示 */
             border-radius: 8px 0 0 8px;
             transition: 0.5s ease-in-out;
@@ -265,6 +365,49 @@
               }
             }
           }
+        }
+      }
+
+      .time-card {
+        height: 100px;
+        width: 100%;
+        background: #ffffffe5;
+        margin-top: 5%;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        .time-card-img {
+          width: 100%;
+          height: 100%;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center; /* 图片居中显示 */
+            transform: scale(1);
+            transition: .5s ease-in-out;
+          }
+
+          img:hover {
+            transform: scale(1.2);
+          }
+        }
+
+        .time-card-box {
+          user-select: none;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          font-size: 23px;
+          padding: 20px;
+          font-weight: 800;
+          border-radius: 10px;
+          width: 100%;
+          height: 100%;
         }
       }
 

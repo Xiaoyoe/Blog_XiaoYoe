@@ -6,17 +6,46 @@ export default {
   components: {},
   data() {
     return {
+      // 随机图片
       content_arr: [],
+      // 时间数据
+      time: '',
+      date: '',
+      timer: '', //  时间定时器
+      // 轮播图
+      carousel_arr: [
+        "https://pic1.zhimg.com/v2-cfc35d591d7e9acf34a161baab91aca8_r.jpg",
+        "https://pica.zhimg.com/v2-d421a1d6ac573e28a598986928c1c9de_1440w.jpg",
+        "https://pic4.zhimg.com/v2-73457c0c8452f3909d01a2520776f687_1440w.jpg",
+        "https://pica.zhimg.com/v2-74f2f1d3fa5281f5dd22f54f70e6e5d8_1440w.jpg",
+        "https://pic3.zhimg.com/v2-fece54634864b6cbcead4d613d4d14b0_1440w.jpg"
+      ], // 轮播图数据
+      carouselIndex: 0,  // 当前轮播的index
+      timer_carousel: null, // 轮播图定时器
     }
   },
   mounted() {
     this.getMockData()
+    this.updateClock()
+    this.timer = setInterval(() => {
+      this.updateClock()
+    }, 1000);
+  },
+  beforeMount() {
+    if (this.timer) {
+      clearInterval(this.timer)
+    } 
+
   },
   methods: {
+    // 轮播图
+    
+    // 图片文章载入
     onImageLoad(item) {
       // 取反 隐藏默认图片 显示随机图片
       item.imgLoaded = true
     },
+    // 获取随机图片
     getRandomImg() {
       axios
         .get('https://xin.xingvvhuang.cn/suijiimg.php?action=json&msg=10')
@@ -32,6 +61,7 @@ export default {
           },
         )
     },
+    // 获取模拟数据
     async getMockData() {
       try {
         const res = await axios.get('/api/cardContentData')
@@ -41,7 +71,26 @@ export default {
         console.log(err)
       }
     },
+    // 实时时间更新
+    updateClock () {
+      const now = new Date()
+      let hours = now.getHours()
+      let minutes = now.getMinutes()
+      let seconds = now.getSeconds()
+      const year = now.getFullYear()
+      const month = now.getMonth() + 1
+      const day = now.getDate()
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;            
+      const formattedMonth = month < 10 ? '0' + month : month;
+      const formattedDay = day < 10 ? '0' + day : day;
+
+      this.time = `${hours}:${minutes}:${seconds}`;
+      this.date = `${year}-${formattedMonth}-${formattedDay}`;
+    }
   },
+  
 }
 </script>
 
@@ -49,6 +98,24 @@ export default {
   <div class="home-main">
     <div class="home-main-box">
       <div class="card-box">
+        <!-- 轮播图 -->
+        <div class="carousel-big-box">
+          <div class="carousel-box">
+            <img v-for="(image, index) in carousel_arr" :key="index"  :src="image" alt="应该是图片" >
+            <div class="arrows-box">
+              <div id="arrows-left" class="arrows-show">←</div>
+              <div id="arrows-right" class="arrows-show">→</div>
+            </div>
+            <div class="carousel-dot-box">
+              <div class="dots"></div>
+              <div class="dots"></div>
+              <div class="dots"></div>
+              <div class="dots-index"></div>
+              <div class="dots"></div>
+            </div>
+          </div>
+        </div>
+        <!-- 文章卡片 -->
         <div v-for="item in content_arr" :key="item.id" class="home-card">
           <div class="home-card-left-box" @click="getMockData()">
             <img
@@ -56,7 +123,7 @@ export default {
               :src="require('@/assets/img/02.jpg')"
               alt="placeHolder"
             >
-            <img :src="item.img" alt="realUrl" @load="onImageLoad(item)">
+            <img :src="item.img" alt="realUrl" @load="onImageLoad(item)" loading="lazy">
           </div>
           <div class="home-card-right-box">
             <!-- 标题盒子 -->
@@ -130,6 +197,16 @@ export default {
                   </i></a>
               </div>
             </div>
+          </div>
+        </div>
+        <!-- 时间卡片 -->
+        <div class="time-card">
+          <div class="time-card-img">
+              <img src="https://pic4.zhimg.com/v2-474d4ea454b824901bff328f6be04fa1_1440w.jpg" alt="">
+          </div>
+          <div class="time-card-box">
+                <div id="date-time">{{date}}</div>
+                <div id="time-time">{{time}}</div>
           </div>
         </div>
         <!-- 公告卡片 -->
