@@ -177,7 +177,8 @@
           display: flex;
           flex-direction: column;
           height: 252px;
-          padding: 16px;
+          padding: 20px 22px;
+          justify-content: center;
           overflow: hidden;
 
           .card-text-title {
@@ -202,19 +203,21 @@
           /* 文本盒子 */
 
           .card-right-text {
-            height: 171px;
+            max-height: 76.8px; /* 根据实际情况调整 */
             margin: 2px 0;
             overflow: hidden;
             display: flex;
             align-items: center;
+            padding: 25px 0;
 
             .text-span {
               box-sizing: border-box;
-              //padding: 20px;
               -webkit-line-clamp: 4;
-              // text-indent: 2em; /* 首行缩进两个字母宽度 */
               line-height: 1.2;   /* 行间距 */
               letter-spacing: 0.05em; /* 文字间距 */
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
             }
           }
         }
@@ -412,18 +415,31 @@
       }
 
       .home-notice {
-        height: 700px;
+        height: 252px;
+        box-shadow: 0 0 10px rgb(231 198 198 / 76%);
         width: 100%;
         background: #ffffffe5;
-        margin-top: 5%;
+        margin-top: 5.3%;
         border-radius: 8px;
-
+        display: flex;
+        flex-direction: column;
 
         .home-notice-title {
-          padding: 10px;
-          font-size: 25px;
+          margin: 18px 0 0 0;
+          font-size: 22px;
           font-weight: 800;
           text-align: center;
+          border-radius: 8px 8px 0 0;
+        }
+
+        .home-notice-box {
+          display: flex;
+          align-items: center;
+          background: rgba(255, 192, 203, 0.307);
+          margin: 20px;
+          justify-content: center;
+          height: 100%;
+          border-radius: 0 0 8px 8px;
         }
       }
       

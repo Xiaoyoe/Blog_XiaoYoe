@@ -27,9 +27,9 @@ export default {
   mounted() {
     this.getMockData()
     this.updateClock()
-    this.timer = setInterval(() => {
-      this.updateClock()
-    }, 1000);
+    // this.timer = setInterval(() => {
+    //   this.updateClock()
+    // }, 1000);
   },
   beforeMount() {
     if (this.timer) {
@@ -212,10 +212,29 @@ export default {
         <!-- 公告卡片 -->
         <div class="home-notice">
           <div class="home-notice-title">
-              公告
-            <div class="home-notice-box">
-
-            </div>
+              Notice-公告
+          </div>
+          <div class="home-notice-box">
+            <ul>
+               <li>
+                欢迎参观本站 看见本条消息请喝水
+              </li>
+              <li>
+                喝水了吧 再伸个腰
+              </li>
+              <li>
+                麻瓜 赶紧干活
+              </li>
+              <li>
+                欢迎参观本站 看见本条消息请喝水
+              </li>
+              <li>
+                喝水了吧 再伸个腰
+              </li>
+              <li>
+                麻瓜 赶紧干活
+              </li>
+            </ul>
           </div>
         </div>
       </div>
