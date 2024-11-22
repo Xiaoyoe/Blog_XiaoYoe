@@ -14,14 +14,14 @@ export default {
       timer: '', //  时间定时器
       // 轮播图
       carousel_arr: [
+        "https://pica.zhimg.com/v2-74f2f1d3fa5281f5dd22f54f70e6e5d8_1440w.jpg",
         "https://pic1.zhimg.com/v2-cfc35d591d7e9acf34a161baab91aca8_r.jpg",
         "https://pica.zhimg.com/v2-d421a1d6ac573e28a598986928c1c9de_1440w.jpg",
         "https://pic4.zhimg.com/v2-73457c0c8452f3909d01a2520776f687_1440w.jpg",
-        "https://pica.zhimg.com/v2-74f2f1d3fa5281f5dd22f54f70e6e5d8_1440w.jpg",
         "https://pic3.zhimg.com/v2-fece54634864b6cbcead4d613d4d14b0_1440w.jpg"
       ], // 轮播图数据
       carouselIndex: 0,  // 当前轮播的index
-      timer_carousel: null, // 轮播图定时器
+      carousel_timer: null, // 轮播图定时器
     }
   },
   mounted() {
@@ -30,16 +30,40 @@ export default {
     // this.timer = setInterval(() => {
     //   this.updateClock()
     // }, 1000);
+    // this.carousel_timer = setInterval(() => {
+    //   this.autoPlay()
+    // }, 5000);
   },
   beforeMount() {
     if (this.timer) {
       clearInterval(this.timer)
     } 
-
+    if (this.carousel_timer) {
+      clearInterval(this.carousel_timer)
+    }
   },
   methods: {
     // 轮播图
-    
+    autoPlay() {
+      this.nextFun()
+    },
+    dotsTo(index) {
+      setTimeout(() => {
+        this.carouselIndex = index
+      }, 300);
+    },
+    nextFun() {
+      this.carouselIndex++
+      if(this.carouselIndex >= this.carousel_arr.length) {
+        this.carouselIndex = 0
+      }
+    },
+    previousFun() {
+      this.carouselIndex--
+      if(this.carouselIndex < 0) {
+        this.carouselIndex = this.carousel_arr.length - 1
+      }
+    },
     // 图片文章载入
     onImageLoad(item) {
       // 取反 隐藏默认图片 显示随机图片
@@ -101,17 +125,17 @@ export default {
         <!-- 轮播图 -->
         <div class="carousel-big-box">
           <div class="carousel-box">
-            <img v-for="(image, index) in carousel_arr" :key="index"  :src="image" alt="应该是图片" >
+            <img :src="carousel_arr[carouselIndex]" :alt="carouselIndex" >
             <div class="arrows-box">
-              <div id="arrows-left" class="arrows-show">←</div>
-              <div id="arrows-right" class="arrows-show">→</div>
+              <div id="arrows-left" class="arrows-show" @click="previousFun()">
+                <svg t="1731893372937" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9697" width="20" height="20"><path d="M452.64 78.016a48 48 0 0 0-64.224-3.296l-3.648 3.296L34.784 428a118.72 118.72 0 0 0-4.64 163.008l4.64 4.896 349.984 349.984a48 48 0 0 0 71.168-64.224l-3.296-3.648L102.656 528a22.72 22.72 0 0 1-2.4-29.28l2.4-2.816L452.64 145.888a48 48 0 0 0 0-67.872z" fill="#CCCCCC" p-id="9698"></path></svg>
+              </div>
+              <div id="arrows-right" class="arrows-show" @click="nextFun()">
+                <svg t="1731893385498" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9843" width="20" height="20"><path d="M571.04 78.016a48 48 0 0 1 64.224-3.296l3.648 3.296 349.984 349.984a118.72 118.72 0 0 1 4.64 163.008l-4.64 4.896-349.984 349.984a48 48 0 0 1-71.168-64.224l3.296-3.648L921.024 528a22.72 22.72 0 0 0 2.4-29.28l-2.4-2.816L571.04 145.888a48 48 0 0 1 0-67.872z" fill="#CCCCCC" p-id="9844"></path></svg>
+              </div>
             </div>
             <div class="carousel-dot-box">
-              <div class="dots"></div>
-              <div class="dots"></div>
-              <div class="dots"></div>
-              <div class="dots-index"></div>
-              <div class="dots"></div>
+              <div v-for="(item,index) in carousel_arr" :key="index" @mouseleave="dotsTo(index)" @mouseenter="dotsTo(index)" :class="carouselIndex == index ? 'dots-index' : 'dots' "></div>
             </div>
           </div>
         </div>
