@@ -3,7 +3,7 @@ export default {
   name: 'NavTop',
   data() {
     return {
-      NavArr: ['欢迎', '首页', '友链', '社交', '关于我'],
+      NavArr: ['欢迎', '首页', '友链', '留言墙', '关于我'],
       logoName: '小约',
     }
   },

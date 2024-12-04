@@ -6,6 +6,21 @@ export default {
   components: {},
   data() {
     return {
+      // 公告数据
+      noticeData_arr: [
+        "如果世界是一头大象那么抽象是否是对世界的一种反抗",
+        "学而不思则罔，不思不学则爽",
+        "妈野，人生他诓我",
+        "我就这么活翘翘的死着",
+        "你觉得对的事情你就去做觉得不对的事情就偷偷去做",
+        "事情会做完的 世界会完蛋的",
+         "如果世界是一头大象那么抽象是否是对世界的一种反抗",
+        "学而不思则罔，不思不学则爽",
+        "妈野，人生他诓我",
+        "我就这么活翘翘的死着",
+        "你觉得对的事情你就去做觉得不对的事情就偷偷去做",
+        "事情会做完的 世界会完蛋的"
+      ],
       // 随机图片
       content_arr: [],
       // 时间数据
@@ -27,9 +42,9 @@ export default {
   mounted() {
     this.getMockData()
     this.updateClock()
-    // this.timer = setInterval(() => {
-    //   this.updateClock()
-    // }, 1000);
+    this.timer = setInterval(() => {
+      this.updateClock()
+    }, 1000);
     // this.carousel_timer = setInterval(() => {
     //   this.autoPlay()
     // }, 5000);
@@ -180,6 +195,7 @@ export default {
         </div>
       </div>
       <div class="side-bar-box">
+        <div class="side-bar-sticky-box">
         <!-- 角色卡片 -->
         <div class="user-card">
           <div class="user-card-box">
@@ -240,26 +256,12 @@ export default {
           </div>
           <div class="home-notice-box">
             <ul>
-               <li>
-                欢迎参观本站 看见本条消息请喝水
-              </li>
-              <li>
-                喝水了吧 再伸个腰
-              </li>
-              <li>
-                麻瓜 赶紧干活
-              </li>
-              <li>
-                欢迎参观本站 看见本条消息请喝水
-              </li>
-              <li>
-                喝水了吧 再伸个腰
-              </li>
-              <li>
-                麻瓜 赶紧干活
+              <li v-for="item in noticeData_arr" :key="item.id" class="home-notice-li">
+                {{item}}
               </li>
             </ul>
           </div>
+        </div>
         </div>
       </div>
     </div>

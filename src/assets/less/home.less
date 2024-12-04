@@ -265,6 +265,11 @@
       margin-left: 20px;
       backdrop-filter: blur(2px);
 
+      .side-bar-sticky-box {
+        // position: sticky;
+        top: 20px;
+      }
+
       .user-card {
         width: 100%;
         height: 340px;
@@ -290,11 +295,30 @@
               width: 120px;
               margin-top: 10px;
               border-radius: 50%;
-              transition: transform 0.6s ease-in-out; /* 添加平滑过渡 */
+              animation: kfrotate 10s ease-in-out infinite;
+              // transition: transform 0.6s ease-in-out; /* 添加平滑过渡 */
             }
 
-            & > img:hover{
-              transform: rotate(360deg); /* 鼠标悬停时旋转一圈 */
+            // & > img:hover{
+            //   transform: rotate(360deg); /* 鼠标悬停时旋转一圈 */
+            // }
+
+            @keyframes kfrotate {
+              0% {
+                transform: rotate(0deg); /* 初始位置 */
+              }
+              25% {
+                transform: rotate(-15deg); /* 向左摇摆 */
+              }
+              50% {
+                transform: rotate(0deg); /* 回到原位 */
+              }
+              75% {
+                transform: rotate(15deg); /* 向右摇摆 */
+              }
+              100% {
+                transform: rotate(0deg); /* 回到原位 */
+              }
             }
 
             .name-box {
@@ -415,7 +439,7 @@
       }
 
       .home-notice {
-        height: 252px;
+        height: 100%;
         box-shadow: 0 0 10px rgb(231 198 198 / 76%);
         width: 100%;
         background: #ffffffe5;
@@ -425,7 +449,7 @@
         flex-direction: column;
 
         .home-notice-title {
-          margin: 18px 0 0 0;
+          margin: 12px 0 0 0;
           font-size: 22px;
           font-weight: 800;
           text-align: center;
@@ -435,11 +459,19 @@
         .home-notice-box {
           display: flex;
           align-items: center;
-          background: rgba(255, 192, 203, 0.307);
-          margin: 20px;
+          margin: 10px 20px;
           justify-content: center;
           height: 100%;
           border-radius: 0 0 8px 8px;
+
+          li {
+            width: 37ch;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            list-style: none;
+            margin: 10px 0; 
+          }
         }
       }
       
