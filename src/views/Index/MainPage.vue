@@ -1,8 +1,10 @@
 <script>
+import NavTop from '@/views/NavBar/NavTop.vue'
+
 export default {
   name: 'Index',
   components: {
-
+    NavTop,
   },
   data() {
     return {
@@ -20,6 +22,7 @@ export default {
 <template>
   <!-- 首页组件 -->
   <div class="index-main">
+    <NavTop />
     <div class="main-card">
       <div class="head-portrait">
         <img :src="headUrl" alt="Darling">

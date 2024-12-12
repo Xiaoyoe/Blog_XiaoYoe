@@ -3,7 +3,7 @@ export default {
   name: 'NavTop',
   data() {
     return {
-      NavArr: ['欢迎', '首页', '友链', '留言墙', '关于我'],
+      NavArr: ['欢迎', '首页', '友链', '留言墙', '关于我', '登录'],
       logoName: '小约',
     }
   },
@@ -17,6 +17,9 @@ export default {
       }
       else if (index === 1) {
         this.$router.push('/Home')
+      }
+      else if (index === 5) {
+        this.$router.push('/Landing')
       }
     },
   },

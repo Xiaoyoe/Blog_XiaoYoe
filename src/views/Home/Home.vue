@@ -1,9 +1,10 @@
 <script>
 import axios from 'axios'
+import NavTop from '@/views/NavBar/NavTop.vue'
 
 export default {
   name: 'Home',
-  components: {},
+  components: {NavTop},
   data() {
     return {
       // 公告数据
@@ -132,9 +133,10 @@ export default {
   
 }
 </script>
-
 <template>
-  <div class="home-main">
+  <div class="home-body">
+    <NavTop />
+    <div class="home-main">
     <div class="home-main-box">
       <div class="card-box">
         <!-- 轮播图 -->
@@ -266,6 +268,8 @@ export default {
       </div>
     </div>
   </div>
+  </div>
+
 </template>
 
 <style scoped lang="less">

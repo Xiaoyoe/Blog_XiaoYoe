@@ -1,5 +1,6 @@
 import Home from '@/views/Home/Home.vue'
 
+import Landing from '@/views/Landing/Landing.vue'
 import Index from '@/views/Index/MainPage.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/Home',
     component: Home,
+  },
+  {
+    path: '/Landing',
+    component: Landing
   },
 ]
 const router = createRouter({

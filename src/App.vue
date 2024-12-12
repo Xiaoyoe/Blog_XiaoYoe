@@ -1,16 +1,14 @@
 <script>
-import NavTop from '@/views/NavBar/NavTop.vue'
 
 export default {
   components: {
-    NavTop,
+    
   },
 }
 </script>
 
 <template>
   <div class="AppMain">
-    <NavTop />
     <router-view />
   </div>
 </template>
