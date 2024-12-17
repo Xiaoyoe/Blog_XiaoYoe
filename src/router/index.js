@@ -2,6 +2,8 @@ import Home from '@/views/Home/Home.vue'
 
 import Landing from '@/views/Landing/Landing.vue'
 import Index from '@/views/Index/MainPage.vue'
+import Essay from '@/views/Essay/Essay.vue'
+
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
@@ -20,6 +22,11 @@ const routes = [
   {
     path: '/Landing',
     component: Landing
+  },
+  {
+    path: '/Essay/:slug',
+    component: Essay,
+    props: true,
   },
 ]
 const router = createRouter({

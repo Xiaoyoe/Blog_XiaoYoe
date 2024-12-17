@@ -128,7 +128,16 @@ export default {
 
       this.time = `${hours}:${minutes}:${seconds}`;
       this.date = `${year}-${formattedMonth}-${formattedDay}`;
+    },
+    // 暂时写死一个 随机获取一个文章名字然后进行传参跳转打开相对应的md文件
+    goEssay () {
+        const slugs = ['JiWang', 'BlogProject_record']; // 存储所有的slug
+        // 从 slugs 数组中随机选择一个slug
+        const randomSlug = slugs[Math.floor(Math.random() * slugs.length)];
+        const slug = randomSlug;
+        this.$router.push(`/Essay/${slug}`);
     }
+
   },
   
 }
@@ -168,7 +177,7 @@ export default {
           </div>
           <div class="home-card-right-box">
             <!-- 标题盒子 -->
-            <div class="card-text-title">
+            <div class="card-text-title" @click="goEssay()">
               <span :title="item.title">{{ item.title }}</span>
             </div>
             <!-- 内容盒子 -->

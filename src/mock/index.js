@@ -14,8 +14,8 @@ Mock.mock('/api/user', 'get', {
 // 模拟卡片文章内容数据(中文)
 Mock.mock('/api/cardContentData', 'get', {
   'status': 200,
-  'data|1-10': [
-    // 生成1-10条数据
+  'data|3-10': [
+    // 生成3-10条数据
     {
       id: '@id',
       title: '@ctitle(2, 10)', // 生成 5 到 20 个中文字符的标题
