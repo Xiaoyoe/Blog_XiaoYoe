@@ -1,64 +1,164 @@
 .essay-box {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-    .essay-detail {
-        width: 80%;
-        padding: 30px;
-        background-color: #f9f9f969;
-        backdrop-filter: blur(6px);
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  // 统一黑色背景和圆角样式
+  .black-background {
+    background-color: black;
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    backdrop-filter: blur(5px);
+    align-items: center;
+  }
+
+  .rounded-top {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .rounded-bottom {
+    border-radius: 0 0 10px 10px;
+  }
+
+  // 顶部盒子
+  .essay-detail-top {
+    .black-background;
+    .rounded-top;
+  }
+
+  // 底部盒子
+  .essay-detail-bottom {
+    .black-background;
+    .rounded-bottom;
+  }
+
+  // 返回键
+  .back_box {
+    padding: 10px;
+    display: flex;
+    width: 70px;
+    align-items: center;
+    justify-content: space-around;
+
+    .cir {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .red, .yellow, .green {
+      &.red { background-color: #ff5f57; }
+      &.yellow { background-color: #ffbd2e; }
+      &.green { background-color: #27c93f; }
+
+      &:hover {
+        transform: scale(1.2);
       }
-      
-      h1 {
-        font-size: 2.4em;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 20px;
-        text-align: center;
-        letter-spacing: 1px;
-      }
-      
-      .markdown-content {
-        font-size: 1.2em;
-        line-height: 1.8;
-        color: #555;
-        word-wrap: break-word;
-        
-        h2, h3, h4 {
-          color: #333;
-          font-weight: bold;
-          margin-top: 1.5em;
-        }
-        
-        p {
-          margin: 1.2em 0;
-          line-height: 1.8;
-        }
-        
-        pre {
-          background-color: #282c34;
-          color: #f8f8f2;
-          padding: 15px;
-          border-radius: 8px;
-          overflow-x: auto;
-        }
-        
-        code {
-          background-color: #f8f8f2;
-          padding: 2px 6px;
-          border-radius: 4px;
-        }
-      }
-      
-      .loading {
-        text-align: center;
-        font-size: 1.5em;
-        color: #888;
-      }
+    }
+
+    .red:hover { background-color: #ff3b30; }
+    .yellow:hover { background-color: #ff9e00; }
+    .green:hover { background-color: #22c55e; }
+  }
+
+  // 文章内容区
+  .essay-detail {
+    width: 80%;
+    margin-top: 3rem;
+    background-color: #f7f7f78f;
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  // 标题样式
+  h1 {
+    font-size: 2.4em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  // Markdown内容
+  .markdown-content {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+    word-wrap: break-word;
+    padding: 30px;
+    margin: 10px;
+
+    a {
+      text-decoration: none;
+    }
+
+    h2, h3 {
+      font-size: 1.9em;
+      font-weight: bold;
+      color: pink;
+    }
+
+    h4 {
+      color: #333;
+      font-weight: bold;
+      margin-top: 1.5em;
+    }
+
+    p {
+      margin: 1.2em 0;
+      line-height: 1.8;
+    }
+
+    pre {
+      background-color: #282c34;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    code {
+      background-color: #f8f8f2;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  }
+
+  // 加载中状态
+  .loading {
+    text-align: center;
+    font-size: 1.5em;
+    color: #888;
+  }
 }
-  
+
+.back-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: pink;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 3rem;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: transform 0.3s ease, background-color 0.3s, opacity 0.3s;
+}
+
+.back-top:hover {
+  background-color: #ff69b4;
+  opacity: 1;
+  transform: translateY(-10px) scale(1.2);
+}

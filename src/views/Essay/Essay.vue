@@ -1,15 +1,30 @@
 <template>
-<div class="essay-box">
+<div>
+  <div class="essay-box">
     <div class="essay-detail">
     <div v-if="essay" class="essay-content">
-      <h1>{{ essay.title }}</h1>
-        <div v-html="contentHtml" class="markdown-content">
+    <div class="essay-detail-top">
+        <div class="back_box" @click="backPage()">
+          <div class="cir red"></div>
+          <div class="cir yellow"></div>
+          <div class="cir green"></div>
         </div>
     </div>
+      <!-- <h1>{{ essay.title }}</h1> -->
+        <div v-html="contentHtml" class="markdown-content"></div>
+    <div class="essay-detail-bottom">
+        <div class="back_box" @click="backPage()">
+          <div class="cir red"></div>
+          <div class="cir yellow"></div>
+          <div class="cir green"></div>
+        </div>
+    </div>
+    </div>
 
-
-    <div v-else class="loading">加载中...</div>
+      <div v-else class="loading">加载中...</div>
+    </div>
   </div>
+    <div class="back-top"></div>
 </div>
 </template>
 
@@ -33,11 +48,13 @@ export default {
     slug: 'fetchEssay',
   },
   methods: {
+    backPage(){
+      this.$router.go(-1);
+    },
+
     async fetchEssay() {
-      console.log(2)
       const essayName = this.slug; // 使用路由参数作为文件名
-      console.log(essayName);
-      console.log(1)
+      console.log("已跳转到:",essayName+".md");
       // 动态导入 Markdown 文件
       try {
         const markdownContent = await import(`@/assets/markdown/${essayName}.md`);

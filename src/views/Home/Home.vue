@@ -131,7 +131,7 @@ export default {
     },
     // 暂时写死一个 随机获取一个文章名字然后进行传参跳转打开相对应的md文件
     goEssay () {
-        const slugs = ['JiWang', 'BlogProject_record']; // 存储所有的slug
+        const slugs = ['JiWang', 'BlogProject_record','Demo']; // 存储所有的slug
         // 从 slugs 数组中随机选择一个slug
         const randomSlug = slugs[Math.floor(Math.random() * slugs.length)];
         const slug = randomSlug;
