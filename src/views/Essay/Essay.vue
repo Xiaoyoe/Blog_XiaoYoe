@@ -10,7 +10,7 @@
           <div class="cir green"></div>
         </div>
     </div>
-      <!-- <h1>{{ essay.title }}</h1> -->
+      <h1>{{ essay.title }}</h1>
         <div v-html="contentHtml" class="markdown-content"></div>
     <div class="essay-detail-bottom">
         <div class="back_box" @click="backPage()">
@@ -36,12 +36,12 @@ export default {
   props: ['slug'], // 接收路由中的 slug 参数
   data() {
     return {
-      essay: null, // 存储文章数据
-      contentHtml: '', // 存储转换后的 HTML 内容
+      essay: null, 
+      contentHtml: '', 
     };
   },
   created() {
-    this.fetchEssay(); // 页面加载时获取文章内容
+    this.fetchEssay();
   },
   watch: {
     // 监听 slug 参数的变化，并重新加载文章内容

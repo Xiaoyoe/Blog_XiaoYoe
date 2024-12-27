@@ -7,21 +7,33 @@ export default {
   components: {NavTop},
   data() {
     return {
-      // 公告数据
-      noticeData_arr: [
-        "如果世界是一头大象那么抽象是否是对世界的一种反抗",
-        "学而不思则罔，不思不学则爽",
-        "妈野，人生他诓我",
-        "我就这么活翘翘的死着",
-        "你觉得对的事情你就去做觉得不对的事情就偷偷去做",
-        "事情会做完的 世界会完蛋的",
-         "如果世界是一头大象那么抽象是否是对世界的一种反抗",
-        "学而不思则罔，不思不学则爽",
-        "妈野，人生他诓我",
-        "我就这么活翘翘的死着",
-        "你觉得对的事情你就去做觉得不对的事情就偷偷去做",
-        "事情会做完的 世界会完蛋的"
-      ],
+    // 公告数据
+    noticeData_arr: [
+    "每一颗星星都是遗失的梦，漂浮在无垠的夜空中",
+    "在时间的洪流里，我们的痛苦只是一粒沙",
+    "一朵花的凋零，预示着世界的一次深呼吸",
+    "世界的每一寸，都是反射出的孤独的边界",
+    "如果世界是一头大象那么抽象是否是对世界的一种反抗",
+    "不是每个答案都有意义，有些问题本身才是答案",
+    "看似平静的海面下，暗流早已翻涌",
+    "我们都在寻找自己，却忘记了自己早已存在",
+    "空旷的街道上，脚步声仿佛是时间的回音",
+    "一瞬间的失落，可能是永恒的开始",
+    "在无尽的黑夜里，存在的意义不过是等待",
+    "每个人的眼睛里，都是未曾完成的宇宙",
+    "一场雨落下之后，世界会重新定义自己的边界",
+    "活在当下的本质是不断逃离过去的困扰",
+    "灵魂的重量，无法用任何尺度来衡量",
+    "每一条路的尽头，都会有新的迷茫",
+    "当风停息时，我们是否也会停下脚步",
+    "时间是一条不存在的河流，流过一切又回到起点",
+    "我们终究无法掌控未来，但总会用力去定义它",
+    "学而不思则罔，不思不学则爽",
+    "妈野，人生他诓我",
+    "我就这么活翘翘的死着",
+    "你觉得对的事情你就去做觉得不对的事情就偷偷去做",
+    "事情会做完的 世界会完蛋的"
+    ],
       // 随机图片
       content_arr: [],
       // 时间数据
@@ -101,16 +113,62 @@ export default {
           },
         )
     },
-    // 获取模拟数据
-    async getMockData() {
-      try {
-        const res = await axios.get('/api/cardContentData')
-        this.content_arr = res.data.data
-        await this.getRandomImg()
-      } catch (err) {
-        console.log(err)
+  // 获取模拟数据
+  async getMockData() {
+    try {
+      const res = await axios.get('/api/cardContentData');
+      // 获取模拟数据后，将前三个固定内容添加进去
+      this.content_arr = res.data.data;
+      
+      // 固定前三个卡片的内容并添加固定标记
+      this.content_arr[0] = {
+    id: 1,
+    title: "微信小程序毕业设计",
+    content: "本篇文章详细介绍了微信小程序毕业设计的整体流程，包括项目选题、技术选型、开发过程、部署上线及常见问题解决方案。适合正在进行微信小程序开发的同学参考。",
+    img: "https://example.com/fixed-image1.jpg",
+    date: "2024-12-27",
+    imgLoaded: false,
+    fixed: true,  // 标记为固定
+    slug: 'MusicProject'  // 文章对应的 slug
+};
+
+this.content_arr[1] = {
+    id: 2,
+    title: "个人博客搭建注意事项",
+    content: "在创建个人博客的过程中，我遇到了一些技术性难题，本文记录了这些问题以及我的解决方法。内容涵盖了项目环境安装、项目配置文件的部署过程中的常见问题，希望能够为有类似需求的开发者提供参考。",
+    img: "https://example.com/fixed-image2.jpg",
+    date: "2024-12-27",
+    imgLoaded: false,
+    fixed: true,  // 标记为固定
+    slug: 'BlogProject_record'  // 文章对应的 slug
+};
+
+this.content_arr[2] = {
+    id: 3,
+    title: "计算机网络技术实操",
+    content: "本文讲解了计算机网络技术的实际应用，包括网络协议、路由交换技术、网络安全与防护等内容。通过具体的实操案例，帮助读者深入理解计算机网络技术的工作原理和实际应用。",
+    img: "https://example.com/fixed-image3.jpg",
+    date: "2024-12-27",
+    imgLoaded: false,
+    fixed: true,  // 标记为固定
+    slug: 'NetWrok'  // 文章对应的 slug
+};
+
+      // 如果模拟数据少于3条，可以直接用这3条固定数据补充
+      if (this.content_arr.length < 3) {
+        this.content_arr = [
+          this.content_arr[0],
+          this.content_arr[1],
+          this.content_arr[2]
+        ];
       }
-    },
+
+      // 获取随机图片
+      await this.getRandomImg();
+    } catch (err) {
+      console.log(err);
+    }
+  },
     // 实时时间更新
     updateClock () {
       const now = new Date()
@@ -129,14 +187,28 @@ export default {
       this.time = `${hours}:${minutes}:${seconds}`;
       this.date = `${year}-${formattedMonth}-${formattedDay}`;
     },
-    // 暂时写死一个 随机获取一个文章名字然后进行传参跳转打开相对应的md文件
-    goEssay () {
-        const slugs = ['JiWang', 'BlogProject_record','Demo']; // 存储所有的slug
-        // 从 slugs 数组中随机选择一个slug
-        const randomSlug = slugs[Math.floor(Math.random() * slugs.length)];
-        const slug = randomSlug;
-        this.$router.push(`/Essay/${slug}`);
+
+  // 跳转到对应的文章
+  goEssay(item) {
+    // 如果是固定的卡片，直接跳转到指定的文章
+    if (item.fixed) {
+      this.$router.push(`/Essay/${item.slug}`);
+    } else {
+      // 如果是随机的卡片，随机选择一个文章
+      const slugs = ['NetWrok', 'BlogProject_record', 'MusicProject']; // 存储所有的slug
+      const randomSlug = slugs[Math.floor(Math.random() * slugs.length)];
+      this.$router.push(`/Essay/${randomSlug}`);
     }
+  },
+    // 滚动到指定元素
+    scrollToElement() {
+      // 获取到 ref 指定的元素并滚动到它
+      this.$refs.targetSection.scrollIntoView({ behavior: 'smooth' });
+    },
+    refreshPage() {
+      window.location.reload();
+    },
+
 
   },
   
@@ -149,7 +221,7 @@ export default {
     <div class="home-main-box">
       <div class="card-box">
         <!-- 轮播图 -->
-        <div class="carousel-big-box">
+        <div class="carousel-big-box" ref="targetSection">
           <div class="carousel-box">
             <img :src="carousel_arr[carouselIndex]" :alt="carouselIndex" >
             <div class="arrows-box">
@@ -166,7 +238,7 @@ export default {
           </div>
         </div>
         <!-- 文章卡片 -->
-        <div v-for="item in content_arr" :key="item.id" class="home-card">
+        <div v-for="item in content_arr" :key="item.id" class="home-card" @click="goEssay(item)">
           <div class="home-card-left-box" @click="getMockData()">
             <img
               v-if="!item.imgLoaded"
@@ -177,7 +249,7 @@ export default {
           </div>
           <div class="home-card-right-box">
             <!-- 标题盒子 -->
-            <div class="card-text-title" @click="goEssay()">
+            <div class="card-text-title">
               <span :title="item.title">{{ item.title }}</span>
             </div>
             <!-- 内容盒子 -->
@@ -225,7 +297,7 @@ export default {
             </div>
             <!-- 其他标签盒子 -->
             <div class="social-tag">
-              <div class="social-tag-follow-me">
+              <div class="social-tag-follow-me" onclick="window.open('https://github.com/Xiaoyoe', '_blank')">
                   Follow Me
               </div>
             </div>
@@ -251,19 +323,19 @@ export default {
           </div>
         </div>
         <!-- 时间卡片 -->
-        <div class="time-card">
-          <div class="time-card-img">
-              <img src="https://pic4.zhimg.com/v2-474d4ea454b824901bff328f6be04fa1_1440w.jpg" alt="">
-          </div>
-          <div class="time-card-box">
-                <div id="date-time">{{date}}</div>
-                <div id="time-time">{{time}}</div>
-          </div>
+      <div class="time-card">
+        <div class="time-card-img">
+          <img src="https://pic4.zhimg.com/v2-474d4ea454b824901bff328f6be04fa1_1440w.jpg" alt="">
+        </div>
+      <div class="time-card-box">
+        <div id="date-time">{{date}}</div>
+        <div id="time-time">{{time}}</div>
+      </div>
         </div>
         <!-- 公告卡片 -->
         <div class="home-notice">
           <div class="home-notice-title">
-              Notice-公告
+              公告
           </div>
           <div class="home-notice-box">
             <ul>
@@ -277,6 +349,15 @@ export default {
       </div>
     </div>
   </div>
+      <!-- 回到顶部和刷新页面按钮 -->
+    <div class="floating-buttons">
+      <div class="scroll-to-top" @click="scrollToElement">
+        <svg t="1735265082982" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5632" width="16" height="16"><path d="M565.248 39.815529l301.176471 301.176471a75.294118 75.294118 0 0 1-106.496 106.496l-167.393883-167.454118v682.767059a60.235294 60.235294 0 0 1-60.235294 60.235294h-30.117647a60.235294 60.235294 0 0 1-60.235294-60.235294V269.552941L264.071529 447.548235a75.294118 75.294118 0 0 1-100.352 5.481412l-6.144-5.481412a75.294118 75.294118 0 0 1 0-106.496l301.176471-301.17647a75.294118 75.294118 0 0 1 106.496 0z" p-id="5633" fill="#ffffff"></path></svg>
+      </div>
+      <div class="refresh-page" @click="refreshPage">
+        <svg t="1735265164121" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10064" width="16" height="16"><path d="M950.371072 532.795629l-84.398202-84.393085c-6.101975-6.096858-14.093996-9.145287-22.087041-9.143241-7.995091-0.001023-15.988136 3.047406-22.079878 9.148357l-84.519975 84.530209c-12.20088 12.195763-12.20088 31.971156 0 44.171012 6.099928 6.094812 14.09195 9.145287 22.082948 9.145287s15.993253-3.050476 22.082948-9.150404l33.171494-33.175587c-16.019859 175.330214-163.813926 313.145-343.250668 313.145-190.096523 0-344.749812-154.653289-344.749812-344.749812s154.653289-344.754928 344.749812-344.754928c92.084255 0 178.658006 35.859719 243.779166 100.975762 12.20088 12.20088 31.966039 12.20088 44.166919 0 12.20088-12.195763 12.20088-31.971156 0-44.166919-76.914764-76.91988-179.176822-119.27657-287.946085-119.27657-224.543056 0-407.217539 182.679599-407.217539 407.222655 0 224.537939 182.674483 407.217539 407.217539 407.217539 212.604142 0 387.574153-163.800623 405.591505-371.808074l29.239951 29.238928c6.099928 6.094812 14.09195 9.145287 22.082948 9.145287 7.990998 0 15.98302-3.050476 22.082948-9.150404C962.571952 564.770877 962.571952 544.995485 950.371072 532.795629z" fill="#ffffff" p-id="10065"></path><path d="M411.244248 429.099918l22.082948-22.082948c12.20088-12.195763 12.20088-31.971156 0-44.166919-12.20088-12.20088-31.966039-12.20088-44.166919 0l-22.082948 22.082948c-12.20088 12.195763-12.20088 31.971156 0 44.166919 6.099928 6.099928 14.09195 9.150404 22.082948 9.150404S405.143297 435.199847 411.244248 429.099918z" fill="#ffffff" p-id="10066"></path><path d="M565.846372 539.536146l-22.082948 22.082948c-12.20088 12.195763-12.20088 31.971156 0 44.166919 6.099928 6.099928 14.09195 9.150404 22.082948 9.150404s15.98302-3.050476 22.082948-9.150404l22.082948-22.082948c12.20088-12.195763 12.20088-31.971156 0-44.165896C597.812411 527.335267 578.047252 527.335267 565.846372 539.536146z" fill="#ffffff" p-id="10067"></path><path d="M336.453868 521.093099c-4.869914 20.679995-4.809539 63.99757 26.373671 95.175663 22.663162 22.658046 51.944046 29.03222 74.18049 29.03222 8.194636 0 15.433504-0.868787 21.025872-2.104941 16.694217-3.691065 27.115568-20.070104 23.638373-36.810371-3.477194-16.730033-19.968797-27.578102-36.754089-24.258497-0.25378 0.035816-23.5166 4.376681-37.923728-10.030447-14.010085-14.020318-9.953699-35.539424-9.658987-37.003775 3.741207-16.673751-6.639211-33.302477-23.312962-37.231973C357.26587 493.89055 340.408947 504.296551 336.453868 521.093099z" fill="#ffffff" p-id="10068"></path></svg>
+      </div>
+    </div>
   </div>
 
 </template>

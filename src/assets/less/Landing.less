@@ -9,26 +9,23 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    // background: linear-gradient(114deg, #7F7FD5, #91EAE4);
-    // background: linear-gradient(114deg, #ee9ca7, #ffdde1);
-    backdrop-filter: blur(8px); 
+    backdrop-filter: blur(8px);
     font-family: Arial, sans-serif;
 }
 
 /* 颜色变量 */
-@primary-color: #36bde6;
-@secondary-color: #7F7FD5;
-@accent-color: #39e9ecae;
-@bg-light: rgba(255, 255, 255, 0.8);
-@bg-dark: rgba(255, 255, 255, 0.473);
-@btn-hover-color: #39e9ecd4;
-@box-shadow-color: skyblue;
+@primary-color: #ff7f7f; /* 主色调，使用温暖的粉红色 */
+@secondary-color: #ffb8b8; /* 次色调，柔和的粉色 */
+@accent-color: #ff9a9a; /* 高亮色，浅粉色 */
+@bg-light: rgba(255, 255, 255, 0.8); /* 浅背景 */
+@bg-dark: rgba(255, 255, 255, 0.473); /* 深背景 */
+@btn-hover-color: #ff9a9a; /* 按钮悬停时的颜色 */
+@box-shadow-color: #ff7f7f; /* 阴影颜色为粉色系 */
 
-// 返回键
+/* 返回键 */
 .back_box {
     height: 40px;
     width: 100px;
-    // background: lightblue;
     position: absolute;
     top: 10px;
     left: 10px;
@@ -36,8 +33,8 @@
     align-items: center;
     justify-content: center;
     transition: .5s ease-in-out;
-    color: #36bde6;
-    font-weight: 800; 
+    color: @primary-color; /* 使用粉色 */
+    font-weight: 800;
 }
 
 .back_box:hover {
@@ -75,7 +72,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // background: @secondary-color;
     background: @bg-dark;
     background: url(../img/03.png);
     background-size: cover;
@@ -94,7 +90,7 @@ form {
 
 /* 表单标题 */
 .p_text {
-    color: @primary-color;
+    color: @primary-color; /* 标题使用主色粉红 */
     font-size: 25px;
     margin-bottom: 30px;
     margin-top: 30px;
@@ -105,11 +101,10 @@ form {
 }
 
 p {
-    color: @primary-color;
+    color: @primary-color; /* 使用粉色作为段落文字颜色 */
     font-size: 35px;
     margin-bottom: 40px;
     font-family: '宋体';
-
 }
 
 /* 输入框 */
@@ -122,7 +117,7 @@ p {
         height: 45px;
         background: transparent;
         border: none;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid #ff7f7f; /* 使用粉色系边框 */
         outline: none;
         padding-left: 10px;
         font-size: 16px;
@@ -150,31 +145,31 @@ input[type='submit'] {
     width: 200px;
     height: 40px;
     margin-top: 20px;
-    background: #87cfeb6d;
+    background: #ff9a9ad6; /* 使用柔和的粉色 */
     border: none;
     border-radius: 20px;
-    border-bottom: 1px solid @accent-color;
+    border-bottom: 1px solid @accent-color; /* 使用高亮色作为底部边框 */
     outline: none;
     transition: 0.3s;
     cursor: pointer;
 
     &:hover {
         transform: translateY(-5px);
-        background: @btn-hover-color;
-        box-shadow: 2px 6px 8px @box-shadow-color;
+        background: @btn-hover-color; /* 悬停时的背景色 */
+        box-shadow: 2px 6px 8px @box-shadow-color; /* 悬停时的阴影 */
     }
 }
 
-/*延迟跳转盒子样式*/
+/* 延迟跳转盒子样式 */
 .left_box {
     .message {
         p {
-            color: rgb(243, 108, 130);
+            color: #ff7f7f; /* 使用粉色字体 */
         }
     }
 }
 
-// 提示文本
+/* 提示文本 */
 .right_box form p,
 .left_box form p {
     font-size: 16px;
@@ -191,9 +186,8 @@ input[type='submit'] {
     display: flex;
     align-items: center;
     justify-content: center;
-    // background: pink;
     .p_text {
         color: red;
         font-size: 15px;
     }
-  }
+}

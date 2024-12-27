@@ -142,6 +142,12 @@
         background: #fffffff1;
         border-radius: 8px;
         box-shadow: 0 0 10px rgb(231 198 198 / 76%);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px); /* 鼠标悬停时有轻微上浮效果 */
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* 鼠标悬停时阴影加深 */
+        }
 
         /* 左边图片盒子样式 */
 
@@ -277,6 +283,12 @@
         background: #ffffffe5;
         border-radius: 8px;
         box-shadow: 0 0 10px rgb(231 198 198 / 76%);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+ 
+        &:hover {
+          transform: translateY(-5px); /* 鼠标悬停时有轻微上浮效果 */
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* 鼠标悬停时阴影加深 */
+        }
 
         .user-card-box {
           display: flex;
@@ -396,89 +408,213 @@
       }
 
       .time-card {
-        height: 100px;
+        height: 98px; /* 增加卡片的高度，给内容更多空间 */
         width: 100%;
-        background: #ffffffe5;
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
         margin-top: 4%;
-        border-radius: 8px;
+        border-radius: 10px; /* 更圆滑的边角 */
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 卡片默认轻微阴影 */
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-8px); /* 增加悬停时的浮动效果 */
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 更强的悬停阴影 */
+        }
+      
+        /* 图片部分样式 */
         .time-card-img {
           width: 100%;
           height: 100%;
+          position: absolute; /* 确保图片位于卡片的底层 */
           
           img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* 图片填充容器，保持比例 */
             object-position: center center; /* 图片居中显示 */
-            transform: scale(1);
-            transition: .5s ease-in-out;
+            transition: transform 0.5s ease-in-out, filter 0.3s ease; /* 动画过渡效果 */
           }
-
+      
           img:hover {
-            transform: scale(1.2);
+            transform: scale(1.1); /* 图片放大效果 */
+            filter: brightness(0.8); /* 增加图片亮度变化，增强悬停效果 */
           }
         }
-
+      
+        /* 内容部分样式 */
         .time-card-box {
+          position: absolute;
+          z-index: 2; /* 使内容部分置于图片之上 */
+          text-align: center;
           user-select: none;
           display: flex;
-          justify-content: center;
           flex-direction: column;
-          font-size: 23px;
+          justify-content: center;
+          font-size: 18px; /* 字体大小适中 */
           padding: 20px;
-          font-weight: 800;
+          font-weight: 600;
+          color: #333333; /* 更深的文本颜色 */
           border-radius: 10px;
+          background-color: rgba(255, 255, 255, 0.8); /* 半透明背景，使文字更加突出 */
+          backdrop-filter: blur(5px); /* 背景模糊效果 */
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 内容区域的阴影 */
+          border: 1px solid rgba(255, 255, 255, 0.6); /* 内容区域的边框 */
           width: 100%;
           height: 100%;
         }
+      
+        #date-time {
+          font-size: 16px;
+          color: #666666; /* 日期部分颜色稍浅 */
+          margin-bottom: 5px; /* 日期和时间之间的间距 */
+        }
+      
+        #time-time {
+          font-size: 24px;
+          color: #333333; /* 时间字体颜色较深 */
+          font-weight: bold;
+        }
       }
-
+      
+      /* 响应式优化 */
+      @media (max-width: 768px) {
+        .time-card {
+          height: 150px;
+          margin-top: 2%;
+        }
+      
+        .time-card-box {
+          padding: 15px;
+          font-size: 16px;
+        }
+      
+        #date-time {
+          font-size: 14px;
+        }
+      
+        #time-time {
+          font-size: 22px;
+        }
+      }
+      
       .home-notice {
-        height: 100%;
-        box-shadow: 0 0 10px rgb(231 198 198 / 76%);
         width: 100%;
-        background: #ffffffe5;
-        margin-top: 5.3%;
-        border-radius: 8px;
+        background: #ffffff;
+        margin-top: 5%;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        border-radius: 12px; /* 调整卡片圆角 */
         display: flex;
         flex-direction: column;
-
-        .home-notice-title {
-          margin: 12px 0 0 0;
-          font-size: 22px;
-          font-weight: 800;
-          text-align: center;
-          border-radius: 8px 8px 0 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 更柔和的阴影 */
+        overflow: hidden;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+      
+        &:hover {
+          transform: translateY(-5px); /* 鼠标悬停时有轻微上浮效果 */
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* 鼠标悬停时阴影加深 */
         }
-
+      
+        .home-notice-title {
+          font-size: 24px;
+          font-weight: 700;
+          color: #333;
+          text-align: center;
+          padding-bottom: 15px;
+          margin-bottom: 15px;
+          border-bottom: 2px solid #ffb8b8; /* 添加底部边框 */
+          letter-spacing: 1px; /* 增加字母间距 */
+        }
+      
         .home-notice-box {
+          flex-grow: 1;
+          padding: 10px 0;
           display: flex;
-          align-items: center;
-          margin: 10px 20px;
           justify-content: center;
-          height: 100%;
-          border-radius: 0 0 8px 8px;
-
+          align-items: center;
+          overflow-y: auto; /* 使公告内容可滚动 */
+          
+          ul {
+            width: 100%;
+            max-width: 600px; /* 最大宽度 */
+            padding-left: 0;
+            margin: 0;
+          }
+      
           li {
-            width: 37ch;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f7f7f7;
+            border-radius: 8px;
             list-style: none;
-            margin: 10px 0; 
+            font-size: 16px;
+            color: #555;
+            font-weight: 500;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      
+            &:hover {
+              background-color: #ffb8b8; /* 鼠标悬停时背景色 */
+              color: #fff; /* 文字颜色变白 */
+              transform: translateX(5px); /* 鼠标悬停时略微移动 */
+            }
+      
+            &:last-child {
+              margin-bottom: 0; /* 最后一项去掉底边距 */
+            }
           }
         }
       }
+      
       
     }
   }
 
 }
 
+/* 固定右下角按钮容器 */
+.floating-buttons {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
 
+/* 公共按钮样式 */
+.floating-buttons div {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: #e89abe;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-buttons div:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 回到顶部按钮 */
+.scroll-to-top svg {
+  fill: white;
+}
+
+/* 刷新页面按钮 */
+.refresh-page svg {
+  fill: white;
+}
 
