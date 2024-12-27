@@ -1,0 +1,383 @@
+.profile-container {
+        position: relative;
+        width: 100%;
+        height: 93vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+    }
+
+    .background-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        opacity: 0.2;
+        z-index: -1;
+    }
+
+    /* 个人卡片样式 */
+    .profile-card {
+        border-radius: 15px;
+        padding: 40px 30px;
+        background: #ffffff69;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 800px;
+        width: 100%;
+        height: 70%;
+        /* 默认高度 */
+        overflow-y: hidden;
+        /* 隐藏溢出的内容 */
+        transition: height .8s ease-in-out, padding .7s ease-in-out, box-shadow 0.3s ease;
+        /* 动画过渡 */
+    }
+
+    .profile-card:hover {
+        padding: 40px 10px;
+        height: 95%;
+        /* 悬停时高度增加 */
+        overflow-y: auto;
+        /* 允许滚动，避免内容被裁剪 */
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        /* 悬停时阴影效果 */
+    }
+
+
+    /* 头像容器 */
+    .avatar-container {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .avatar {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .name {
+        font-size: 2.5rem;
+        color: #333;
+        margin-top: 15px;
+        font-family: 'Pixel', sans-serif;
+        text-shadow: 1px 1px 2px #ffb8b8, 0 0 25px #a2a9fa;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        color: #444;
+        margin-top: 10px;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.5;
+    }
+
+    .skills-container {
+        margin-top: 40px;
+    }
+
+    .skills-title {
+        font-size: 1.8rem;
+        color: #ffb8b8;
+        font-family: 'Pixel', sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .skill-card {
+        background-color: #fff;
+        color: #333;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .skill-card:hover {
+        transform: translateY(-5px);
+        background-color: #ffb8b8;
+        color: #fff;
+    }
+
+    .projects-container {
+        margin-top: 40px;
+    }
+
+    .projects-title {
+        font-size: 1.8rem;
+        color: #ffb8b8;
+        font-family: 'Pixel', sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .project-card {
+        background: #fffffff1;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-name {
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .project-description {
+        color: #555;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+    .project-link {
+        color: #ffb8b8;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .blog-container {
+        margin-top: 40px;
+    }
+
+    .blog-title {
+        font-size: 1.8rem;
+        color: #ffb8b8;
+        font-family: 'Pixel', sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .blog-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .blog-item {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .blog-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-title-item {
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .blog-description {
+        color: #555;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+    .blog-link {
+        color: #ffb8b8;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .contact-container {
+        margin-top: 40px;
+    }
+
+    .contact-title {
+        font-size: 1.8rem;
+        color: #ffb8b8;
+        font-family: 'Pixel', sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .social-icon {
+        font-size: 2rem;
+        color: #333;
+        transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-icon:hover {
+        transform: scale(1.2);
+        color: #ffb8b8;
+    }
+
+    .dynamic-text {
+        margin-top: 40px;
+        text-align: left;
+        background: #ffffff69;
+        height: 10px;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        width: 10%;
+        justify-content: center;
+        flex-direction: column;
+        transition: .8s ease-in-out;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .dynamic-text:hover {
+        text-align: left;
+        width: 40%;
+        padding: 20px;
+        height: 500px;
+        transform: translateY(-8px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* header 样式 */
+    .dynamic-text-header {
+        position: relative; /* 为了定位伪元素 */
+        display: inline-block; /* 让标题成为行内块元素 */
+        font-size: 1.3rem; /* 设置标题字体大小 */
+        width: 200px;
+        padding: 10px 0; /* 给标题上下增加间距 */
+        text-align: center;
+        margin-top: 30px;
+      }
+      
+      .dynamic-text-header::before,
+      .dynamic-text-header::after {
+        content: ''; /* 伪元素必须有内容，空字符串表示不显示文本 */
+        position: absolute; /* 绝对定位 */
+        left: 0;
+        width: 0; /* 默认线宽为0 */
+        height: 3px; /* 线条的高度 */
+        background-color: #ffa369; /* 线条的颜色 */
+        transition: width 0.3s ease; /* 平滑过渡动画 */
+      }
+      
+      .dynamic-text-header::before {
+        top: 0; /* 定位到标题的上方 */
+        width: 100%; /* 鼠标悬停时，线条宽度变为标题的100% */
+
+      }
+      
+      .dynamic-text-header::after {
+        bottom: 0; /* 定位到标题的下方 */
+        width: 100%; /* 鼠标悬停时，线条宽度变为标题的100% */
+
+      }
+      
+
+    /* body 样式，初始设置为隐藏 */
+    .dynamic-text-body {
+        font-size: 1.2rem;
+        color: #444;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        padding: 5px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    /* 悬停时显示完整内容 */
+    .dynamic-text:hover .dynamic-text-body {
+        max-height: 500px;
+        /* 控制显示的最大高度 */
+    }
+
+
+    /* 标签盒子 */
+
+    .social-tag {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 100%;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 35px;
+
+
+
+        .social-tag-follow-me {
+            background: #49b1f5;
+            height: 100%;
+            width: 75%;
+            border-radius: 13px;
+            color: white;
+            font-weight: 800;
+            user-select: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* 添加 box-shadow 的过渡 */
+        }
+
+        .social-tag-follow-me:hover {
+            background: #f58195d7;
+            transform: scale(1.1) translateY(-5px);
+            /* 向上平移 5px */
+            box-shadow: 0 4px 8px rgba(255, 15, 15, 0.315);
+            /* 添加阴影效果 */
+        }
+
+        .social-tag-box {
+            width: 65%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 10px;
+
+            .icon {
+                width: 25px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                transition: transform 0.3s ease;
+            }
+
+            .icon:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    .social-tag:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
