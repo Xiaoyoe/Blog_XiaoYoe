@@ -5,6 +5,8 @@ import Index from '@/views/Index/MainPage.vue'
 import Essay from '@/views/Essay/Essay.vue'
 import Calendar from '@/views/DynamicCalendar/DynamicCalendar.vue'
 import MessageWall from '@/views/MessageWall/MessageWall.vue'
+import My from '@/views/My/My.vue'
+import NotFound from '@/views/NotFound/NotFound.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -38,6 +40,14 @@ const routes = [
     path: '/MessageWall',
     component:MessageWall
   },
+  {
+    path: '/My',
+    component:My
+  },
+  {
+    path: '/404',
+    component:NotFound
+  }
 ]
 const router = createRouter({
   history: createWebHashHistory(),

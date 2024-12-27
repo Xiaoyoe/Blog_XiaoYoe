@@ -6,8 +6,9 @@ export default {
       NavArr: [
         { name: '欢迎', color: '#ff6347' },
         { name: '首页', color: '#49b1f5' },  
-        { name: '日历', color: '#8a2be2' },  
+        { name: '日历', color: '#ffb6c1' },  
         { name: '留言墙', color: '#ff8c00' },
+        { name: '关于我', color: '#a2d8e6'},
         { name: '登录', color: '#ff1493' }
       ],
       logoName: 'XiaoYoe',
@@ -33,6 +34,9 @@ export default {
         this.$router.push('/MessageWall')
       }
       else if (index === 4) {
+        this.$router.push('/My')
+      }
+      else if (index === 5) {
         this.$router.push('/Landing')
       }
     },
@@ -117,7 +121,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 .NavBox {
   height: 100%;
   padding: 6px 0;
@@ -131,22 +135,30 @@ export default {
 }
 
 .logoName {
-  font-family: 'Source Han Sans', '微软雅黑', sans-serif; /* 选择现代简洁的中文字体 */
-  letter-spacing: 1px; /* 适度调整字间距，避免过于紧凑 */
-  font-weight: 700; /* 字重稍微降低，避免太厚重，700较为适合 */
-  font-size: 24px; /* 根据设计需要，适当增大字体大小 */
-  color: #333; /* 选择深灰色，显得稳重和清晰 */
-  margin-left: 50px; /* 左边距适当调整，使文字更加居中或协调 */
-  text-transform: none; /* 中文不需要全大写，保持原有形式 */
-  line-height: 1.5; /* 增加行高，避免文字挤在一起 */
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 微弱阴影，增加层次感 */
+  font-family: 'Source Han Sans', '微软雅黑', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 24px;
+  color: #333;
+  margin-left: 50px;
+  text-transform: none;
+  line-height: 1.5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  animation: colorChange 8s ease-in-out infinite;
 }
 
-
-.logoName:hover {
-  transition: 0.2s ease-in-out;
-  color: #49b1f5;
+@keyframes colorChange {
+  0% {
+    color: #333;
+  }
+  50% {
+    color: #49b1f5;
+  }
+  100% {
+    color: #333;
+  }
 }
+
 
 .searchBox {
   margin-right: 30px;
@@ -205,4 +217,98 @@ li:hover::after {
 li:hover {
   color: var(--underline-color);
 }
+
+/* 背景遮罩层 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 确保弹窗在最上层 */
+}
+
+/* 弹窗样式 */
+.modal-card {
+  border-radius: 8px;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px; 
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+
+      &:hover {
+      transform: translateY(-5px); /* 鼠标悬停时有轻微上浮效果 */
+    }
+}
+
+/* 输入框样式 */
+.search-input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #ffb8b8a7;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: 0.3s ease-in-out;
+  border-color: #ffb8b8;
+}
+
+/* 聚焦效果 */
+.search-input:focus {
+  color: #fff;
+  outline: none;
+}
+
+
+/* 按钮样式 */
+.search-btn {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ffb8b8; /* 按钮颜色 */
+  color: white;
+  border: none;
+  font-weight: 800;
+  margin-left: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* 鼠标悬停时按钮颜色变化 */
+.search-btn:hover {
+  width: 90%;
+  padding: 10px 10px;
+  background-color: #faa2a28f;
+  border-radius: 8px;
+}
+
+/* 弹窗关闭时的背景样式 */
+.modal-overlay {
+  transition: opacity 0.3s ease;
+}
+
+/* 弹窗卡片的动画效果 */
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-card {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
 </style>
