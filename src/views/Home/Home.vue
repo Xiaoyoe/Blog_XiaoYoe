@@ -1,14 +1,11 @@
-<script>
-import axios from 'axios'
-import NavTop from '@/views/NavBar/NavTop.vue'
-
-export default {
-  name: 'Home',
-  components: {NavTop},
-  data() {
-    return {
-    // 公告数据
-    noticeData_arr: [
+<script setup>
+  import { ref, onMounted, onBeforeMount } from 'vue'
+  import axios from 'axios'
+  import { useRouter } from 'vue-router'
+  import NavTop from '@/views/NavBar/NavTop.vue'
+  
+  // 定义响应式数据
+  const noticeData_arr = ref([
     "每一颗星星都是遗失的梦，漂浮在无垠的夜空中",
     "在时间的洪流里，我们的痛苦只是一粒沙",
     "一朵花的凋零，预示着世界的一次深呼吸",
@@ -33,187 +30,184 @@ export default {
     "我就这么活翘翘的死着",
     "你觉得对的事情你就去做觉得不对的事情就偷偷去做",
     "事情会做完的 世界会完蛋的"
-    ],
-      // 随机图片
-      content_arr: [],
-      // 时间数据
-      time: '',
-      date: '',
-      timer: '', //  时间定时器
-      // 轮播图
-      carousel_arr: [
-        "https://pica.zhimg.com/v2-74f2f1d3fa5281f5dd22f54f70e6e5d8_1440w.jpg",
-        "https://pic1.zhimg.com/v2-cfc35d591d7e9acf34a161baab91aca8_r.jpg",
-        "https://pica.zhimg.com/v2-d421a1d6ac573e28a598986928c1c9de_1440w.jpg",
-        "https://pic4.zhimg.com/v2-73457c0c8452f3909d01a2520776f687_1440w.jpg",
-        "https://pic3.zhimg.com/v2-fece54634864b6cbcead4d613d4d14b0_1440w.jpg"
-      ], // 轮播图数据
-      carouselIndex: 0,  // 当前轮播的index
-      carousel_timer: null, // 轮播图定时器
-    }
-  },
-  mounted() {
-    this.getMockData()
-    this.updateClock()
-    this.timer = setInterval(() => {
-      this.updateClock()
-    }, 1000);
-    // this.carousel_timer = setInterval(() => {
-    //   this.autoPlay()
-    // }, 5000);
-  },
-  beforeMount() {
-    if (this.timer) {
-      clearInterval(this.timer)
-    } 
-    if (this.carousel_timer) {
-      clearInterval(this.carousel_timer)
-    }
-  },
-  methods: {
-    // 轮播图
-    autoPlay() {
-      this.nextFun()
-    },
-    dotsTo(index) {
-      setTimeout(() => {
-        this.carouselIndex = index
-      }, 300);
-    },
-    nextFun() {
-      this.carouselIndex++
-      if(this.carouselIndex >= this.carousel_arr.length) {
-        this.carouselIndex = 0
-      }
-    },
-    previousFun() {
-      this.carouselIndex--
-      if(this.carouselIndex < 0) {
-        this.carouselIndex = this.carousel_arr.length - 1
-      }
-    },
-    // 图片文章载入
-    onImageLoad(item) {
-      // 取反 隐藏默认图片 显示随机图片
-      item.imgLoaded = true
-    },
-    // 获取随机图片
-    getRandomImg() {
-      axios
-        .get('https://xin.xingvvhuang.cn/suijiimg.php?action=json&msg=10')
-        .then(
-          (response) => {
-            this.content_arr.forEach((item, index) => {
-              item.img = response.data.data[index].imgurl
-              item.imgLoaded = false // 初始化图片加载状态
-            })
-          },
-          (err) => {
-            console.log(err)
-          },
-        )
-    },
-  // 获取模拟数据
-  async getMockData() {
-    try {
-      const res = await axios.get('/api/cardContentData');
-      // 获取模拟数据后，将前三个固定内容添加进去
-      this.content_arr = res.data.data;
-      
-      // 固定前三个卡片的内容并添加固定标记
-      this.content_arr[0] = {
-    id: 1,
-    title: "微信小程序毕业设计",
-    content: "本篇文章详细介绍了微信小程序毕业设计的整体流程，包括项目选题、技术选型、开发过程、部署上线及常见问题解决方案。适合正在进行微信小程序开发的同学参考。",
-    img: "https://example.com/fixed-image1.jpg",
-    date: "2024-12-27",
-    imgLoaded: false,
-    fixed: true,  // 标记为固定
-    slug: 'MusicProject'  // 文章对应的 slug
-};
-
-this.content_arr[1] = {
-    id: 2,
-    title: "个人博客搭建注意事项",
-    content: "在创建个人博客的过程中，我遇到了一些技术性难题，本文记录了这些问题以及我的解决方法。内容涵盖了项目环境安装、项目配置文件的部署过程中的常见问题，希望能够为有类似需求的开发者提供参考。",
-    img: "https://example.com/fixed-image2.jpg",
-    date: "2024-12-27",
-    imgLoaded: false,
-    fixed: true,  // 标记为固定
-    slug: 'BlogProject_record'  // 文章对应的 slug
-};
-
-this.content_arr[2] = {
-    id: 3,
-    title: "计算机网络技术实操",
-    content: "本文讲解了计算机网络技术的实际应用，包括网络协议、路由交换技术、网络安全与防护等内容。通过具体的实操案例，帮助读者深入理解计算机网络技术的工作原理和实际应用。",
-    img: "https://example.com/fixed-image3.jpg",
-    date: "2024-12-27",
-    imgLoaded: false,
-    fixed: true,  // 标记为固定
-    slug: 'NetWrok'  // 文章对应的 slug
-};
-
-      // 如果模拟数据少于3条，可以直接用这3条固定数据补充
-      if (this.content_arr.length < 3) {
-        this.content_arr = [
-          this.content_arr[0],
-          this.content_arr[1],
-          this.content_arr[2]
-        ];
-      }
-
-      // 获取随机图片
-      await this.getRandomImg();
-    } catch (err) {
-      console.log(err);
-    }
-  },
-    // 实时时间更新
-    updateClock () {
-      const now = new Date()
-      let hours = now.getHours()
-      let minutes = now.getMinutes()
-      let seconds = now.getSeconds()
-      const year = now.getFullYear()
-      const month = now.getMonth() + 1
-      const day = now.getDate()
-      hours = hours < 10 ? '0' + hours : hours;
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      seconds = seconds < 10 ? '0' + seconds : seconds;            
-      const formattedMonth = month < 10 ? '0' + month : month;
-      const formattedDay = day < 10 ? '0' + day : day;
-
-      this.time = `${hours}:${minutes}:${seconds}`;
-      this.date = `${year}-${formattedMonth}-${formattedDay}`;
-    },
-
-  // 跳转到对应的文章
-  goEssay(item) {
-    // 如果是固定的卡片，直接跳转到指定的文章
-    if (item.fixed) {
-      this.$router.push(`/Essay/${item.slug}`);
-    } else {
-      // 如果是随机的卡片，随机选择一个文章
-      const slugs = ['NetWrok', 'BlogProject_record', 'MusicProject']; // 存储所有的slug
-      const randomSlug = slugs[Math.floor(Math.random() * slugs.length)];
-      this.$router.push(`/Essay/${randomSlug}`);
-    }
-  },
-    // 滚动到指定元素
-    scrollToElement() {
-      // 获取到 ref 指定的元素并滚动到它
-      this.$refs.targetSection.scrollIntoView({ behavior: 'smooth' });
-    },
-    refreshPage() {
-      window.location.reload();
-    },
-
-
-  },
+  ])
   
-}
+  const content_arr = ref([])  // 用ref替代data中的content_arr
+  const time = ref('')  // 用ref替代data中的time
+  const date = ref('')  // 用ref替代data中的date
+  const carousel_arr = ref([
+    "https://pica.zhimg.com/v2-74f2f1d3fa5281f5dd22f54f70e6e5d8_1440w.jpg",
+    "https://pic1.zhimg.com/v2-cfc35d591d7e9acf34a161baab91aca8_r.jpg",
+    "https://pica.zhimg.com/v2-d421a1d6ac573e28a598986928c1c9de_1440w.jpg",
+    "https://pic4.zhimg.com/v2-73457c0c8452f3909d01a2520776f687_1440w.jpg",
+    "https://pic3.zhimg.com/v2-fece54634864b6cbcead4d613d4d14b0_1440w.jpg"
+  ])
+  const carouselIndex = ref(0)
+  const carousel_timer = ref(null)
+  const timer = ref(null)
+  
+  const router = useRouter()
+  
+  // 获取模拟数据
+  async function getMockData() {
+    try {
+      const res = await axios.get('/api/cardContentData')
+      content_arr.value = res.data.data
+  
+      // 固定前三个卡片的内容并添加固定标记
+      content_arr.value[0] = {
+        id: 1,
+        title: "微信小程序毕业设计",
+        content: "本篇文章详细介绍了微信小程序毕业设计的整体流程，包括项目选题、技术选型、开发过程、部署上线及常见问题解决方案。适合正在进行微信小程序开发的同学参考。",
+        img: "https://example.com/fixed-image1.jpg",
+        date: "2024-12-27",
+        imgLoaded: false,
+        fixed: true,
+        slug: 'MusicProject'
+      }
+  
+      content_arr.value[1] = {
+        id: 2,
+        title: "个人博客搭建注意事项",
+        content: "在创建个人博客的过程中，我遇到了一些技术性难题，本文记录了这些问题以及我的解决方法。内容涵盖了项目环境安装、项目配置文件的部署过程中的常见问题，希望能够为有类似需求的开发者提供参考。",
+        img: "https://example.com/fixed-image2.jpg",
+        date: "2024-12-27",
+        imgLoaded: false,
+        fixed: true,
+        slug: 'BlogProject_record'
+      }
+  
+      content_arr.value[2] = {
+        id: 3,
+        title: "计算机网络技术实操",
+        content: "本文讲解了计算机网络技术的实际应用，包括网络协议、路由交换技术、网络安全与防护等内容。通过具体的实操案例，帮助读者深入理解计算机网络技术的工作原理和实际应用。",
+        img: "https://example.com/fixed-image3.jpg",
+        date: "2024-12-27",
+        imgLoaded: false,
+        fixed: true,
+        slug: 'NetWrok'
+      }
+  
+      // 如果模拟数据少于3条，可以直接用这3条固定数据补充
+      if (content_arr.value.length < 3) {
+        content_arr.value = [
+          content_arr.value[0],
+          content_arr.value[1],
+          content_arr.value[2]
+        ]
+      }
+  
+      // 获取随机图片
+      await getRandomImg()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
+  // 获取随机图片
+  function getRandomImg() {
+    axios.get('https://xin.xingvvhuang.cn/suijiimg.php?action=json&msg=10')
+      .then(response => {
+        content_arr.value.forEach((item, index) => {
+          item.img = response.data.data[index].imgurl
+          item.imgLoaded = false
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  
+  // 实时时间更新
+  function updateClock() {
+    const now = new Date()
+    let hours = now.getHours()
+    let minutes = now.getMinutes()
+    let seconds = now.getSeconds()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const day = now.getDate()
+    hours = hours < 10 ? '0' + hours : hours
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    seconds = seconds < 10 ? '0' + seconds : seconds
+  
+    const formattedMonth = month < 10 ? '0' + month : month
+    const formattedDay = day < 10 ? '0' + day : day
+  
+    time.value = `${hours}:${minutes}:${seconds}`
+    date.value = `${year}-${formattedMonth}-${formattedDay}`
+  }
+  
+  // 跳转到对应的文章
+  function goEssay(item) {
+    if (item.fixed) {
+      router.push(`/Essay/${item.slug}`)
+    } else {
+      const slugs = ['NetWrok', 'BlogProject_record', 'MusicProject']
+      const randomSlug = slugs[Math.floor(Math.random() * slugs.length)]
+      router.push(`/Essay/${randomSlug}`)
+    }
+  }
+  
+  // 滚动到指定元素
+  function scrollToElement() {
+    this.$refs.targetSection.scrollIntoView({ behavior: 'smooth' })
+  }
+  
+  // 刷新页面
+  function refreshPage() {
+    window.location.reload()
+  }
+  
+  // 轮播图自动切换
+  function autoPlay() {
+    nextFun()
+  }
+  
+  function nextFun() {
+    carouselIndex.value++
+    if (carouselIndex.value >= carousel_arr.value.length) {
+      carouselIndex.value = 0
+    }
+  }
+  
+  function previousFun() {
+    carouselIndex.value--
+    if (carouselIndex.value < 0) {
+      carouselIndex.value = carousel_arr.value.length - 1
+    }
+  }
+  
+  function dotsTo(index) {
+    setTimeout(() => {
+      carouselIndex.value = index
+    }, 300)
+  }
+  
+  // 生命周期钩子
+  onMounted(() => {
+    getMockData()
+    updateClock()
+    timer.value = setInterval(() => {
+      updateClock()
+    }, 1000)
+  })
+  
+  onBeforeMount(() => {
+    if (timer.value) {
+      clearInterval(timer.value)
+    }
+    if (carousel_timer.value) {
+      clearInterval(carousel_timer.value)
+    }
+  })
+  
+  const onImageLoad = (item)=> {
+    // 图片加载完成后，隐藏默认图片并显示随机图片
+    item.imgLoaded = true;
+  }
 </script>
+
 <template>
   <div class="home-body">
     <NavTop />
