@@ -11,6 +11,13 @@ Mock.mock('/api/user', 'get', {
   },
 })
 
+// 使用 Mock.js 生成账户和密码数据
+Mock.mock({
+  'account': '@word(8, 12)', // 生成一个长度为8到12的账户名（字母数字混合）
+  'password': '@string("lower", 8, 12)', // 生成一个8到12位的小写字母密码
+});
+
+
 // 模拟卡片文章内容数据(中文)
 Mock.mock('/api/cardContentData', 'get', {
   'status': 200,
